@@ -10,14 +10,16 @@ PYTHON_INTERPRETER = python
 # COMMANDS                                                                      #
 #################################################################################
 
+setup:
+	poetry install
+	docker-compose up -d
 
-## Install Python Dependencies
-.PHONY: requirements
-requirements:
-	$(PYTHON_INTERPRETER) -m pip install -U pip
-	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+upload-data:
+	poetry run python lab3/scripts/create_bucket.py ; \
+	poetry run python lab3/scripts/upload_to_s3.py --bucket data-bucket --file_path lab3/titanic.csv
 
-
+process-data:
+	poetry run python lab3/scripts/process_data.py --bucket data-bucket --input_path titanic.csv --output_path titanic_processed.csv
 
 
 ## Delete all compiled Python files
