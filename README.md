@@ -1,22 +1,26 @@
 # ml_lab
 
 ## Setup environment
+1. Создайте .env файл в корневой директории проекта, аналогичный файлу .env.example (просто удалить .example из названия файла);
 
-1. Создать виртуальное окружение:
+2. Поднимем minio в контейнере и установим зависимости:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate  # Windows
+  make setup
    ```
 
-2. Установить зависимости:
+2. Создадим бакет и загрузим titanic.csv в minio:
    ```bash
-   pip install -r requirements.txt
+   make upload-data
    ```
 
-3. Установить pre-commit:
+3. Обработаем titanic.csv и положим обработанный titanic_processed.csv в minio:
    ```bash
-   pre-commit install
+   process-data
+   ```
+
+   P.S. На машине должен быть установлен python и poetry. Если в глобальных переменных/путях стоит python3 вместо python, то poetry может некорректно работать. Чтобы исправить, создадим символическую ссылку:
+      ```bash
+   sudo ln -s $(which python3) /usr/local/bin/python
    ```
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
