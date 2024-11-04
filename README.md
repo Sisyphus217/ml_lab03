@@ -4,22 +4,22 @@
 1. Создайте .env файл в корневой директории проекта, аналогичный файлу .env.example (просто удалить .example из названия файла);
 
 2. Поднимем minio в контейнере и установим зависимости:
-   ```bash
-  make setup
+ ```bash
+   make setup
    ```
 
 2. Создадим бакет и загрузим titanic.csv в minio:
-   ```bash
+ ```bash
    make upload-data
    ```
 
 3. Обработаем titanic.csv и положим обработанный titanic_processed.csv в minio:
-   ```bash
-   process-data
+ ```bash
+   make process-data
    ```
 
-   P.S. На машине должен быть установлен python и poetry. Если в глобальных переменных/путях стоит python3 вместо python, то poetry может некорректно работать. Чтобы исправить, создадим символическую ссылку:
-      ```bash
+P.S. На машине должен быть установлен python и poetry. Если в глобальных переменных/путях стоит python3 вместо python, то poetry может некорректно работать. Чтобы исправить, создадим символическую ссылку:
+   ```bash
    sudo ln -s $(which python3) /usr/local/bin/python
    ```
 
